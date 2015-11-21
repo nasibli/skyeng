@@ -1,0 +1,67 @@
+<!doctype>
+<html>
+<head>
+  <?php echo $this->headTitle()?>
+  <?php $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')?>
+  <?php echo $this->headMeta()?>
+  <?php $this->headLink()->appendStylesheet('/ext/css/ext-all.css')?>
+  <?php $this->headScript()->appendFile($this->baseUrl('/ext/ext-base.js'));?>
+  <?php $this->headScript()->appendFile($this->baseUrl('/ext/ext-all.js'));?>
+  <?php $this->headScript()->appendFile($this->baseUrl('Mine.js'));?>
+  <?php $this->headScript()->appendFile($this->baseUrl('App.js'));?>
+  <?php echo $this->headLink()?>
+  <?php echo $this->headScript()?>
+</head>
+<body>
+    <div id="teacherWindow"> </div>
+    <div id="pupilWindow"> </div>
+    <div id="teacherPupilAddWindow"> </div>
+    <div id="teacherPupilViewWindow"> </div>
+    <script type="text/javascript">
+
+      Ext.onReady(function(){
+
+      var teacherTab = createTeacherTab();
+
+      var pupilTab   = createPupilTab();
+
+      var pupilPairTab =  createPupilPairTab();
+
+      var view = new Ext.Viewport({
+        layout: 'border',
+        items: [ {
+          region: 'center',
+          xtype: 'tabpanel',
+
+          activeTab: 0,
+          itemId: 'tabs',
+          items: [
+            {
+              'title': 'Учителя',
+               items: [teacherTab]
+            },
+            {
+              title: 'Ученики',
+              items: [pupilTab]
+            },
+            {
+              title: 'Ученики(общие)',
+              items: [pupilPairTab]
+            }
+
+          ]
+
+        }]
+      });
+
+      teacherTab.setHeight(view.getHeight()-28);
+      pupilTab.setHeight(view.getHeight()-28);
+      pupilPairTab.setHeight(view.getHeight()-28);
+      view.doLayout();
+
+      });
+
+    </script>
+
+</body>
+</html>
